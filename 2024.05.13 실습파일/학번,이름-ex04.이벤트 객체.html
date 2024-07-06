@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ex04.이벤트 객체</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+      }
+
+      .outer {
+        background-color: #3498db;
+        color: #fff;
+      }
+
+      .inner {
+        background-color: #e74c3c;
+        color: #fff;
+      }
+
+      .title {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      #event-info {
+        display: flex;
+        width: 600px;
+        height: 100px;
+        border: 2px solid #ccc;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="button-container">
+        <button id="outer" class="outer">Outer Button</button>
+        <button id="inner" class="inner">Inner Button</button>
+      </div>
+    </div>
+    <p class="title">이벤트 정보</p>
+    <div id="event-info"></div>
+    <script>
+    
+    </script>
+  </body>
+</html>

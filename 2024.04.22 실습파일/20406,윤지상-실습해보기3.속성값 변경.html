@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기3.setAttribute 실습</title>
+  <style>
+    #site {
+      font-size: 30px;
+      color: white;
+      background: hotpink;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>주소 변경해보기</h1>
+  <a href="#">주소 없음</a>
+  <input type="button" id="btn" value="네이버 주소로 변신" />
+  <input type="button" id="btn2" value="속성제거" />
+  <script>
+    // 요소명.addEventListener("이벤트 종류", 리스너 함수)
+    const anchor = document.querySelector("a");
+    const inputBtn = document.querySelectorAll("input")
+
+
+    inputBtn.forEach((element, key) => {
+      element.addEventListener("click", (e) => {
+        if (element.getAttribute("id") === "btn") {
+          // 네이버 주소로 변환
+          anchor.textContent = "네이버";
+          anchor.setAttribute("id", "site");
+          anchor.setAttribute("href", "https://www.naver.com");
+        } else {
+          // 속성 제거
+          anchor.textContent = "속성 제거 완료";
+          anchor.removeAttribute("id")
+          anchor.setAttribute("href", "#")
+        }
+      });
+    })
+
+    /*const anchor = document.querySelector("a");
+    const changeAnchorHrefBtn = document.querySelector("#btn");
+    const removeAnchorHrefBtn = document.querySelector("#btn2");
+
+    const toggleAnchor = () => {
+      if (anchor.getAttribute("href") === "#") {
+        anchor.setAttribute("href", "https://www.naver.com");
+        anchor.setAttribute("id", "site");
+      } else {
+        anchor.setAttribute("href", "#");
+        anchor.removeAttribute("id");
+      }
+    }
+
+
+    changeAnchorHrefBtn.addEventListener("click", toggleAnchor)
+
+    removeAnchorHrefBtn.addEventListener("click", toggleAnchor)*/
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>실습해보기4.배경색 변경</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #theBody {
+      height: 100vh;
+      transition: .3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #btn {
+      background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(27, 20, 241, 1) 75%, rgba(0, 212, 255, 1) 100%);
+      color: white;
+      padding: 30px;
+      border: none;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+
+<body id="theBody">
+  <button id="btn">배경색 바꾸기</button>
+  <script>
+    // white, yellow, aqua, purple
+    const colorList = ["white", "yellow", "aqua", "purple"]
+    const theBody = document.querySelector("#theBody")
+    let handler = changeBackgroundColorHandler()
+
+    function* changeBackgroundColorHandler() {
+      yield* colorList;
+    }
+
+    document.querySelector("#btn").addEventListener("click", () => {
+      const nextValue = handler.next();
+
+      if (!nextValue.value) handler = changeBackgroundColorHandler()
+
+      theBody.style.backgroundColor = nextValue.value;
+    })
+
+    /*    const colorList = ["white", "yellow", "aqua", "purple"]
+        const theBody = document.querySelector("#theBody")
+        let i = 0;
+    
+        document.querySelector("#btn").addEventListener("click", () => {
+          theBody.style.backgroundColor = colorList[i++ % colorList.length]
+        })*/
+
+  </script>
+</body>
+
+</html>

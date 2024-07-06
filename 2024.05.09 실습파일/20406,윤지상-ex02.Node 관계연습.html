@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ex02.Node관계 연습</title>
+  <style>
+    body {
+      background-color: aliceblue;
+    }
+
+    li {
+      line-height: 30px;
+    }
+
+    .list_style {
+      background-color: aqua;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">Node관계 연습</h1>
+  <div class="container">
+    <ul id="tutorial">
+      <li class="html">HTML</li>
+      <!-- 주석까지 셀까? -->
+      <li class="css">CSS</li>
+      <li class="css3">CSS3</li>
+      <li class="javascript">JavaScript</li>
+      <li class="jquery">jQuery</li>
+    </ul>
+    <input type="button" value="childNodes" />
+    <input type="button" value="children" />
+    <input type="button" value="모든 li태그를 빨간색" />
+    <ol id="result"></ol>
+  </div>
+  <script>
+    const tutorial = document.querySelector("#tutorial");
+    const ol = document.querySelector("#result");
+
+    const onClickHandler = (event) => {
+      const { target: { value } } = event;
+
+      ol.innerHTML = "";
+
+      const nodeList = tutorial[value] || tutorial["children"];
+
+      if (value.includes("빨간색")) {
+        for (let node of nodeList) {
+          node.style.color = "red";
+        }
+      } else {
+        for (let node of nodeList) {
+          const newLi = document.createElement("li");
+          newLi.textContent = node.nodeName;
+          ol.append(newLi);
+        }
+      }
+    }
+
+    document.querySelectorAll("input[type=button]").forEach(el => el.addEventListener("click", onClickHandler));
+
+    // 상위 노드 접근
+    const li_parentNode = document.querySelector("li").parentNode;
+    console.log(`li_parentNode: ${li_parentNode}`);
+
+    // 상위 엘리먼트노드 접근
+    const li_parentElement = document.querySelector("li").parentElement;
+    console.log(`li_parentElement: ${li_parentElement}`);
+
+    /**
+    * parentNode VS parentElement
+    * - parentNode는 종류에 상관없이 부모노드 반환
+    * - parentElement는 부모의 요소 노드를 반환
+    */
+    // document.documentElement의 부모는 document임
+    console.log(document.documentElement.parentNode);
+
+    // document 노드는 요소 노드가 아니기 때문에 parentElement는 null을 반환
+    console.log(document.documentElement.parentElement);
+
+    // 하위노드 접근
+    const parentNode = document.getElementById("tutorial");
+    // 하위의 처음
+    console.log("firstNode : ", parentNode.firstChild);
+    console.log("firstElementNode : ", parentNode.firstElementChild);
+
+    // 하위 마지막 노드
+    console.log("lastNode : ", parentNode.lastChild);
+    console.log("lastElementNode : ", parentNode.lastElementChild);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습해보기2.구구단</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .question-box,
+    .result-box {
+      margin: 10px 0;
+    }
+
+    .answer-input {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    .submit-button,
+    .retry-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .submit-button:hover,
+    .retry-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <form class="container">
+    <h1>구구단을 맞춰 보아요</h1>
+    <div id="question" class="question-box"></div>
+    <input type="number" id="answer" class="answer-input" placeholder="정답을 입력하세요">
+    <input type="submit" id="submitAnswer" class="submit-button" value="제출">
+    <div id="result" class="result-box"></div>
+    <button id="retry" class="retry-button" style="display: none;">다시 도전</button>
+    </div>
+    <script>
+
+
+    </script>
+</body>
+
+</html>

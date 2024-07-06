@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>캡처링 단계</title>
+  <style>
+    body * {
+      margin: 10px;
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="DIV1">
+    DIV1
+    <div class="DIV2">
+      DIV2
+      <div class="DIV3">DIV3</div>
+    </div>
+  </div>
+  <script>
+    /**
+    * - capture phase
+    * - window 객체에서부터 모든 DOM 객체를 거쳐 target DOM 객체에 전달되는 과정
+    * - 자식 요소에서 발생한 이벤트가 부모 요소로부터 시작해서 안쪽 자식 요소까지 전파하는 과정
+    */
+    const divTags = document.querySelectorAll("div");
+    for (let el of divTags) {
+      el.addEventListener("click", e => {
+        alert(e.currentTarget.className);
+        console.log(`capture 단계: ${e.currentTarget.className}`);
+      }, true);
+    }
+  </script>
+</body>
+
+</html>

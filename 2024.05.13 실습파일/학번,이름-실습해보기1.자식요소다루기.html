@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실습해보기1.자식요소다루기</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 30px 30px;
+      }
+
+      .titleBox {
+        text-align: center;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .btnWrap {
+        display: flex;
+        justify-content: center;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      input {
+        padding: 10px 0;
+        width: calc(30% - 20px);
+        border: none;
+        border-radius: 10px;
+        background-color: #fee500;
+        margin-right: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      input:last-child {
+        margin-right: 0;
+        background-color: rgb(255, 0, 0);
+        color: white;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+      }
+
+      ul {
+        list-style: none;
+        flex-wrap: wrap;
+        display: flex;
+        width: auto;
+        border: 1px solid #ccc;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      ul > * {
+        font-size: 80px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin: 20px;
+        padding: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>자식 노드 다루기</h1>
+    <div class="titleBox">
+      <p class="title">Balls</p>
+      <div class="btnWrap">
+        <input class="childrenBtn" type="button" value="children 버튼" />
+        <input class="childNodesBtn" type="button" value="childNodes 버튼" />
+        <input class="reset" type="button" value="RESET" />
+      </div>
+    </div>
+    <div class="container">
+      <ul class="balls">
+        <li>⚽</li>
+        <li>🥎</li>
+        <li>🏀</li>
+        <li>🏐</li>
+        <li>🎱</li>
+        <li>🎳</li>
+        <!-- <p>🏈</p> -->
+      </ul>
+    </div>
+    <script>
+      const btns = document.querySelectorAll("input");
+      const ball_elements = balls.children;
+      const ball_Nodes = balls.childNodes;
+
+      btns.forEach(item=>{
+        item.addEventListener("click", ()=>{
+          if(item.classList.contains("childrenBtn")){ // children버튼
+            for (let element of ball_elements) {
+              element.style.backgroundColor = "#00bdfe";
+            }
+          }else if(){ // childNodes 버튼
+            // Hint! tagName, nodeName 프로퍼티
+            // NodeList에서 요소노드만 가져와서 스타일 지정
+
+          }else{ // RESET
+            for(let item of balls.children){
+              if(!item.getAttribute("style")){
+                alert("스타일 적용되어있지 않음");
+              }
+              item.removeAttribute("style");
+            }
+          }
+        })
+      });
+    </script>
+  </body>
+</html>

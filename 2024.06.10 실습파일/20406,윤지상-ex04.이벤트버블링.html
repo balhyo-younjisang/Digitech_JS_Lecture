@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>버블링 단계</title>
+  <style>
+    body * {
+      margin: 10px;
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="DIV1">
+    DIV1
+    <div class="DIV2" id="item2">
+      DIV2
+      <div class="DIV3">DIV3</div>
+    </div>
+  </div>
+  <script>
+    /**
+    * bubbling phase 
+    * - 이벤트가 target 의 DOM 객체를 거쳐 Window 객체에 전달되는 과정
+    * - 자식 요소에서 발생한 이벤트가 바깥 부모 요소로 전파
+    * - addEventListener 의 3번째 매개변수의 기본값은 false
+    */
+    const divTags = document.querySelectorAll("div");
+
+    for (let el of divTags) {
+      el.addEventListener("click", (e) => {
+        alert(e.currentTarget.className);
+        console.log(`bubble 단계 : ${e.currentTarget.className}`);
+      }, false)
+    }
+  </script>
+</body>
+
+</html>

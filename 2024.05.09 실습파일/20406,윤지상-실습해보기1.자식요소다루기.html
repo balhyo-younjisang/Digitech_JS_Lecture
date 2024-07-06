@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기6</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 30px;
+    }
+
+    .titleBox {
+      text-align: center;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .btnWrap {
+      display: flex;
+      justify-content: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    input {
+      padding: 10px 0;
+      width: calc(30% - 20px);
+      border: none;
+      border-radius: 10px;
+      background-color: #fee500;
+      margin-right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input:last-child {
+      margin-right: 0;
+      background-color: rgb(255, 0, 0);
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    ul {
+      list-style: none;
+      flex-wrap: wrap;
+      display: flex;
+      width: auto;
+      border: 1px solid #ccc;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    ul>* {
+      font-size: 80px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin: 20px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>자식 노드 다루기</h1>
+  <div class="titleBox">
+    <p class="title">Balls</p>
+    <div class="btnWrap">
+      <input class="childrenBtn" type="button" value="children 버튼" />
+      <input class="childNodesBtn" type="button" value="childNodes 버튼" />
+      <input class="reset" type="button" value="RESET" />
+    </div>
+  </div>
+  <div class="container">
+    <ul class="balls">
+      <li>⚽</li>
+      <li>🥎</li>
+      <li>🏀</li>
+      <li>🏐</li>
+      <li>🎱</li>
+      <li>🎳</li>
+      <p>🏈</p>
+    </ul>
+  </div>
+  <script>
+    /***
+    * nodeType 프로퍼티
+    * - node의 타입을 상수로 리턴
+    * 1. Element Node ( 요소 노드 )
+    * 3. Text Node ( 텍스트 노드 )
+    * 9. Document Node ( 문서 노드 )
+    *
+    *
+    * tagName 프로퍼티 : 요소노드 존재
+    * nodeName 프로퍼티 : 모든 노드 존재
+    */
+    const balls = document.querySelector(".balls");
+    const inputs = document.querySelectorAll("input");
+
+    const onClickHandler = () => {
+      const { target: { value } } = event;
+
+      if (value.includes("children")) {
+        Array.from(balls.children).forEach(item => item.setAttribute("style", "background-color: red"));
+      } else if (value.includes("childNodes")) {
+        for (const item of balls.childNodes) {
+          if (item.nodeName.includes("#")) continue;
+          item.setAttribute("style", "background-color: blue");
+        }
+      } else {
+        !balls.children[0].hasAttribute("style") ? alert("Reset할 요소들이 없습니다") : Array.from(balls.children).forEach(item => item.style.backgroundColor = null);
+      }
+    }
+
+
+    inputs.forEach(input => input.addEventListener("click", onClickHandler)); 
+  </script>
+</body>
+
+</html>

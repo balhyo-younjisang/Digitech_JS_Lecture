@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ex03.target과 currentTarget의 차이</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container>.upper {
+      background: gold;
+      width: 300px;
+      text-align: center;
+    }
+
+    .upper>.lower {
+      background: pink;
+      font-size: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="upper" id="div">
+      <span class="lower" id="span">
+        span
+      </span>
+    </div>
+  </div>
+  <script>
+    /**
+    * target vs currentTarget
+    * - target : 실제 이벤트가 발생한 요소
+    * - currentTarget : 이벤트 리스너가 달린 요소
+    */
+    document.querySelector(".upper").addEventListener("click", (e) => {
+      console.log(`id: ${e.target.id}, className: ${e.target.className}`)
+      console.log(`${e.target.tagName} target:`, e.target)
+      console.log(`${e.target.nodeName} currentTarget:`, e.currentTarget)
+    })
+
+  </script>
+</body>
+
+</html>

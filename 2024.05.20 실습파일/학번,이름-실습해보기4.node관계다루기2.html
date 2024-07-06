@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기4.node관계다루기2</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    ul {
+      list-style: none;
+      line-height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>트리 구조에서 부모 노드 찾기</h1>
+    <p>
+      각 노드는 숫자로 표시되며, 숫자를 입력하면 해당 숫자의 부모노드를 찾을
+      수 있습니다.
+    </p>
+    <div id="tree">
+      <ul id="root">
+        <li data-value="1">
+          1
+          <ul>
+            <li data-value="2">
+              2
+              <ul>
+                <li data-value="4">4</li>
+                <li data-value="5">5</li>
+              </ul>
+            </li>
+            <li data-value="3">3</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <span>찾을 노드의 값을 입력하세요: <input type="text" id="nodeValue" /></span>
+    <button>부모 노드 찾기</button>
+    <p id="parentResult"></p>
+  </div>
+
+  <script>
+
+  </script>
+</body>
+
+</html>

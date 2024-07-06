@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ex03.add_Element</title>
+</head>
+
+<body>
+  <p>버튼을 클릭하면 h1 스타일로 텍스트가 출력됩니다.</p>
+  <button>Click</button>
+  <script>
+    // 요소명.addEventListener("이벤트", 이벤트리스너[함수명]);
+    document.querySelector("button").addEventListener("click", () => {
+      // <h1>Hello World!</h1>
+      // 1. h1 태그의 요소 노드 생성
+      const newTag_h1 = document.createElement("h1");
+      // 2-1. Hello World! 텍스트 노드 생성
+      // const hello_text = document.createTextNode("Hello World!");
+      // newTag_h1.appendChild(hello_text);
+
+      // 2-2. 요소 노드에 텍스트를 지정
+      newTag_h1.textContent = "Hello World";
+
+      // 3. 부모 노드에 삽입 
+      document.documentElement.appendChild(newTag_h1);
+
+    })  
+  </script>
+</body>
+
+</html>

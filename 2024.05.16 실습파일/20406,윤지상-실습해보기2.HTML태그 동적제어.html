@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기2.HTML태그 동적 제어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
+
+    #buttons-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      border-radius: 5px;
+      padding: 15px 30px;
+      border: none;
+    }
+
+    li {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>동적으로 HTML 태그 생성 및 제거</h2>
+
+  <div id="buttons-container">
+    <button id="addItemBtn">Add Item</button>
+    <button id="removeItemBtn">Remove Last Item</button>
+  </div>
+
+  <ul id="list">
+    <!-- 여기에 동적으로 추가될 아이템이 나열 -->
+  </ul>
+
+  <script>
+    const list = document.getElementById("list");
+    const btns = document.querySelectorAll("button");
+
+    const addListItemHandler = () => {
+      const length = list.childElementCount;
+
+      if (length === 0 && document.querySelector("h3")) {
+        document.documentElement.removeChild(document.querySelector("h3"));
+      }
+
+      if (length + 1 > 10) {
+        alert("아이템은 10개 이상으로 추가될 수 없습니다");
+        return;
+      }
+
+      const newListItem = document.createElement("li");
+      newListItem.textContent = `${list.children.length + 1}번째 아이템`;
+
+      list.appendChild(newListItem);
+    }
+
+    const removeLastListItemHandler = () => {
+      if (list.childElementCount == 0) {
+        if (document.querySelector("h3")) {
+          alert("더이상 삭제할 아이템이 없습니다");
+        } else {
+          const alertMsg = document.createElement("h3");
+          alertMsg.textContent = "모두 삭제되었습니다";
+          document.documentElement.appendChild(alertMsg);
+        }
+        return;
+      }
+
+      list.lastChild.remove();
+    }
+
+    btns.forEach(btn => btn.addEventListener("click", (event) => {
+      const { target: { textContent } } = event;
+
+      textContent.includes("Add") ? addListItemHandler() : removeLastListItemHandler();
+    }));
+  </script>
+</body>
+
+</html>

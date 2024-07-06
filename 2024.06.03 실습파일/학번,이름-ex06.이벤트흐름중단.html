@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 흐름 중단</title>
+    <style>
+        #div_ {
+            background-color: #ccc;
+            padding: 20px;
+            display: block;
+        }
+
+        #p_ {
+            background-color: #aaa;
+            padding: 20px;
+            display: block;
+        }
+
+        span {
+            background-color: #888;
+            padding: 20px;
+            display: block;
+        }
+
+        section {
+            background-color: #4477AA;
+            padding: 0 10px 50px 20px;
+            margin: 50px 0 0 0;
+        }
+
+        section:before {
+            background-color: #114477;
+            padding: 5px;
+            margin: 0 0 0 -20px;
+            border-bottom: 2px solid #002244;
+            border-bottom-right-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            content: "결과 콘솔";
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div_">
+        DIV영역
+        <p id="p_">
+            P영역
+            <span id="span_">SPAN영역</span>
+        </p>
+    </div>
+    <section id="content"><br><br></section>
+    <script>
+       
+
+    </script>
+</body>
+
+</html>

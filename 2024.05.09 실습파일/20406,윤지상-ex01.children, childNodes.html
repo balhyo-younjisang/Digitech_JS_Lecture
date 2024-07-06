@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ex01.children VS childNodes</title>
+  </head>
+  <body>
+    <div class="library">
+      <p id="one" class="book">1번</p>
+      <p id="two" class="book">2번</p>
+    </div>
+    <script>
+		const library = document.querySelector(".library");
+		// 1. children 프로퍼티
+		// => HTMLCollection, element
+		const elements = library.children;
+		console.log("1. children: ", elements);
+		console.log("1-1.", elements[Symbol.toStringTag]);
+		console.log("1-2. children 길이 : ", elements.length);
+
+		// 2. childNodes 프로퍼티
+		// -=> NodeList, nodes
+		const nodes = library.childNodes;
+		console.log("2. childNodes: ", nodes);
+		console.log("2-1.", nodes[Symbol.toStringTag]);
+		console.log("2-2. childNodes 길이 : ", nodes.length);
+		// => 0, 2, 4는 #text 노드
+		// 엔터까지 공백으로 #text 노드 총 3개 포함해서 길이는 총 5개
+
+		/**
+		  * document.querySelectorAll() 에서도 NodeList를 반환하지만, 이때는 element Collection 임
+		  * 예) 클래스명을 파라미터로 지정 => 클래스명이 같은 것만 추출하기 때문에 #text 노드 반환 X
+		 */
+	</script>
+  </body>
+
+</html>

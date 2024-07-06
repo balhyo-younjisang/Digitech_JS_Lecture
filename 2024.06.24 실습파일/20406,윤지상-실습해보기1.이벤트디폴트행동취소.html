@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>실습해보기1.이벤트의 디폴트 행동 취소</title>
+</head>
+
+<body>
+  <h3>이벤트의 디폴트 행동 취소</h3>
+  <hr>
+  <a href="#">
+    네이버로 이동할 지 물어보는 링크</a>
+  <hr>
+  <p>자바스크립트를 열심히 하시겠습니까?</p>
+  <form>
+    <input type="checkbox">예(체크 됨)<br>
+    <input type="checkbox">아니오(체크 안됨)
+  </form>
+  <script>
+    document.querySelector("a").addEventListener("click", (e) => {
+      e.preventDefault();
+      const isMove = confirm("네이버로 이동하시겠습니까?");
+
+      /**
+      * window.open
+      * - 새로운 브라우저 창이나 탭을 열어야 할 때 사용
+      * - 예) 외부 링크를 열거나 팝업 창을 만들 때
+      * - window.open(url, name, specs, replace)
+      * => url : 주소, name : 창 이름(_blank, _parent, _self ...)
+      * specs : 창의 크기, 스크롤 여부, 리사이즈 크기
+      * replace : history 항목 대체 여부 지정
+      * (true : 현재 history 대체, false : history에 새 항목을 만듦)
+      *
+      * location.href
+      * - 현재 페이지를 다른 페이지로 변경해야 할 때 사용
+      * - 예) 네비게이션 링크 클릭 시 사용
+      **/
+      isMove ? open("https://naver.com", "popupNaver", "width=500,height=600,left=200,top=200") : null;
+    })
+
+    document.querySelectorAll("form input")[1].addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기5.classList최종</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container {
+      display: grid;
+      justify-content: space-around;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .item {
+      margin: 20px;
+      font-size: 40px;
+      padding: 10px;
+      border: 5px solid skyblue;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .3s;
+    }
+
+    .btn {
+      background-color: rgb(27, 27, 27);
+      font-size: 14px;
+      line-height: 30px;
+      padding: 5px 10px;
+      color: white;
+      border-radius: 10px;
+    }
+
+    .btn:nth-child(4) {
+      background-color: rgb(255, 87, 115);
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .active {
+      transform: scale(1.1);
+      background-color: rgb(172, 172, 172);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>classList 연습해보기</h1>
+  <div class="buttons">
+    <button class="btn" onclick="choiceMenuHandler()">Hamburger</button>
+    <button class="btn" onclick="choiceMenuHandler()">Taco</button>
+    <button class="btn" onclick="choiceMenuHandler()">Pizza</button>
+    <button class="btn" onclick="choiceMenuHandler()">RESET</button>
+  </div>
+  <div class="container">
+    <div class="box1">
+      <div class="item hamburger">🍔</div>
+      <div class="item taco">🌮</div>
+      <div class="item hamburger">🍔</div>
+      <div class="item pizza">🍕</div>
+    </div>
+    <div class="box2">
+      <div class="item pizza">🍕</div>
+      <div class="item taco">🌮</div>
+      <div class="item taco">🌮</div>
+      <div class="item hamburger">🍔</div>
+    </div>
+    <div class="box3">
+      <div class="item taco">🌮</div>
+      <div class="item pizza">🍕</div>
+      <div class="item hamburger">🍔</div>
+      <div class="item pizza">🍕</div>
+    </div>
+  </div>
+  <script>
+    const hamburgerList = document.getElementsByClassName("hamburger")
+    const pizzaList = document.getElementsByClassName("pizza")
+    const tacoList = document.getElementsByClassName("taco")
+    const activeList = document.getElementsByClassName("active")
+
+    const removeSelect = () => {
+      Array.from(activeList).forEach((element) => {
+        element.classList.remove("active");
+      })
+    }
+
+    /**
+    * @param {HTMLDivElement[]} list
+    */
+    const toggleListMenuHandler = (list) => {
+      removeSelect()
+      Array.from(list).forEach((element) => {
+        element.classList.toggle("active");
+      })
+    }
+
+    const choiceMenuHandler = () => {
+      console.log(activeList);
+      const { target: { textContent } } = event;
+
+      switch (textContent) {
+        case "Hamburger":
+          toggleListMenuHandler(hamburgerList);
+          break;
+        case "Pizza":
+          toggleListMenuHandler(pizzaList);
+          break;
+        case 'Taco':
+          toggleListMenuHandler(tacoList);
+          break;
+        case 'RESET':
+          if (activeList.length === 0) alert("RESET할 아이템이 없음")
+          else removeSelect()
+          break;
+      }
+    }
+  </script>
+</body>
+
+</html>

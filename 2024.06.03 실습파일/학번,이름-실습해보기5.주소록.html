@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>주소록</title>
+    <style>
+      body {
+        transition: all 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>주소록 예제</h2>
+    <form>
+      이름: <input type="text" name="name" /><br />
+      전화번호: <input type="text" name="tel" /><br /><br />
+      <input data-name="save" type="button" value="저장" />
+      <input data-name="reset" type="button" value="리셋" />
+      <input data-name="mode" type="button" value="다크모드" />
+    </form>
+    <hr />
+    <h3>주소록 목록</h3>
+    <ul id="addrlist"></ul>
+    <script></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ex05.dataset</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      margin: 10px;
+      display: inline-block;
+      text-align: center;
+      line-height: 100px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- data-변수명="값": 커스텀 속성 표시 -->
+  <h1>dataset 예제</h1>
+  <div class="box red" data-color="red">Box 1</div>
+  <div class="box blue" data-color="blue">Box 2</div>
+  <div class="box green" data-color="green">Box 3</div>
+  <div class="box yellow" data-color="yellow">Box 4</div>
+  <script>
+    // 조건 : 이벤트 객체 활용( target ) 
+    /**const toggleClickHandler = (e) => {
+      const { target } = e;
+      target.hasAttribute("style") ?
+        target.removeAttribute("style") :
+        target.setAttribute("style", `background-color: ${target.classList[1]}`);
+    }
+
+
+    document.querySelectorAll(".box").forEach((box) => {
+      box.addEventListener("click", (e) => toggleClickHandler(e));
+    })*/
+
+    // dataset 속성 접근 : 요소노드.dataset.변수명
+
+    document.querySelectorAll(".box").forEach((box, idx) => {
+      box.addEventListener("click", ({ target }) => {
+        // 클릭한 박스의 dataset 속성 출력
+        target.hasAttribute('style') ? target.removeAttribute("style") : target.setAttribute("style", `background-color: ${target.dataset.color}`);
+      })
+    })
+
+  </script>
+</body>
+
+</html>

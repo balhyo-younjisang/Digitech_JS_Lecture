@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습해보기6.collection</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .listWrap {
+      width: 250px;
+      padding: 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      text-align: center;
+    }
+
+    .listWrap>ul {
+      line-height: 30px;
+    }
+
+    ul>.title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .listWrap>button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 50px;
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="listWrap">
+    <ul class="fruitList">
+      <span class="title">과일 리스트</span>
+      <li class="fruit">apple</li>
+      <li class="fruit">banana</li>
+      <li class="fruit">grape</li>
+    </ul>
+    <button class="fruitColorBtn">색상 변경</button>
+  </div>
+
+
+  <div class="listWrap">
+    <ul class="animalList">
+      <span class="title">동물 리스트</span>
+      <li class="animal">monkey</li>
+      <li class="animal">pig</li>
+      <li class="animal">cat</li>
+    </ul>
+    <button class="animalColorBtn">색상 변경</button>
+  </div>
+  <script>
+    // Q1. fruitColorBtn 클릭시 fruitList의 모든 li태그의 클래스명을 active로 지정
+    const fruitColorBtn = document.querySelector(".fruitColorBtn");
+
+    fruitColorBtn.addEventListener("click", () => {
+      const list = document.getElementsByClassName("fruit");
+
+      /*for (let i = 0; i < list.length; i++) {
+        list[i].className = "active"
+      }*/
+      /*for (let i = list.length - 1; i >= 0; i--) {
+        list[i].className = "active"
+      }*/
+      const list2 = [...list]
+      const list3 = Array.from(list)
+      const list4 =
+        list2.forEach(el => el.className = "active")
+    })
+    // 조건
+    // 1) 모든 li태그들을 HTMLCollection 형태로 가져올 것
+    // 2) className을 사용하여 클래스명을 지정할 것
+
+    // Q2. animalColorBtn 클릭시 animalList의 모든 li태그의 클래스명을 active로 지정
+    // 조건
+    // 1) 모든 li태그들을 NodeList 형태로 가져올 것
+    // 2) className을 사용하여 클래스명을 지정할 것
+    const animalColorBtn = document.querySelector(".animalColorBtn");
+
+    animalColorBtn.addEventListener("click", () => {
+      document.querySelectorAll(".animalList li").forEach(el => el.className = "active");
+    })
+  </script>
+</body>
+
+</html>

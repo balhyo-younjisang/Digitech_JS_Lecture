@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주소록</title>
+  <style>
+    body {
+      transition: all 0.5s;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>주소록 예제</h2>
+  <form>
+    이름: <input type="text" name="name" /><br />
+    전화번호: <input type="text" name="tel" /><br /><br />
+    <input data-name="save" type="button" value="저장" />
+    <input data-name="reset" type="button" value="리셋" />
+    <input data-name="mode" type="button" value="다크모드" />
+  </form>
+  <hr />
+  <h3>주소록 목록</h3>
+  <ul id="addrlist"></ul>
+  <script>
+    const list = document.querySelector("ul");
+
+    const changeScreenMode = () => {
+      const target = this.document.documentElement;
+      const theme = target.getAttribute("color-theme") || "light";
+
+      const bgColor = theme === "dark" ? "white" : "black";
+      const fontColor = theme === "dark" ? "black" : "white";
+
+      this.document.bgColor = bgColor;
+      this.document.documentElement.style.color = fontColor;
+      this.document.documentElement.setAttribute("color-theme", theme === "dark" ? "light" : "dark");
+
+    }
+
+    const reset = () => {
+      if (list.children.length === 0) {
+        alert("초기화할 주소록이 존재하지 않습니다");
+        return;
+      }
+
+      for (let li of Array.from(list.children)) {
+        list.removeChild(li);
+      }
+    }
+
+    const save = (name, phone) => {
+      const data = document.createElement("li");
+      data.textContent = `${name} : ${phone}`;
+      list.appendChild(data);
+    }
+
+    document.querySelectorAll("input[type='button']").forEach(el => el.addEventListener("click", (e) => {
+      const behavior = e.target.value;
+      const name = document.querySelector("input[name='name']").value;
+      const phone = document.querySelector("input[name='tel']").value;
+
+      if (behavior.includes("다크모드")) {
+        changeScreenMode();
+      } else if (behavior.includes("리셋")) {
+        reset()
+      } else {
+        if (name.length !== 0 && phone.length !== 0)
+          save(name, phone);
+        else alert("전화번호와 이름을 모두 입력해주세요")
+
+        name = "";
+        phone = "";
+      }
+    }))
+  </script>
+</body>
+
+</html>

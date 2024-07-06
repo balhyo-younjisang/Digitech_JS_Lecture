@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ex03-1</title>
+  <style>
+    ul {
+      line-height: 30px;
+      font-size: 20px;
+    }
+
+    li.active {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>target & 버블링</h1>
+  <div class="content">
+
+  </div>
+  <script>
+    const orderText = ['First', 'Second', 'Thrid']
+    const contentWrapper = document.querySelector(".content");
+
+    const createInnerContent = (list, order) => {
+      const tag = document.createElement("li");
+      tag.textContent = `${order} item`;
+
+      list.appendChild(tag);
+    }
+
+    (function () {
+      const list = document.createElement("ul");
+      list.setAttribute("style", "list-style: decimal");
+      contentWrapper.appendChild(list);
+
+      for (order of orderText) {
+        createInnerContent(list, order);
+      }
+
+      // 버블링 원리
+      // 버블링의 원리를 활용하면 부모 요소에만 이벤트 핸들러를 등록하여 처리할 수 있다
+      // => 이벤트 위임
+      list.addEventListener("click", ({ target }) => {
+        // target.toggleAttribute("class") ? target.removeAttribute("class") : target.setAttribute("class", "active");
+        target.classList.contains("active") ? target.classList.remove("active") : target.classList.add("active")
+      })
+    })()
+  </script>
+</body>
+
+</html>

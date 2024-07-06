@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습해보기2.구구단</title>
+  <style>
+    html,
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-content: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+      height: 300px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .questionBox,
+    .resultBox {
+      margin: 10px 0;
+    }
+
+    .answerInput {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      margin-bottom: 10px;
+    }
+
+    .submitBtn,
+    .retryBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .submitBtn:hover,
+    .retryBtn:hover {
+      background-color: #0056b3;
+    }
+
+    .retryBtn {
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <select class="digit">
+    <option value="1" selected>난이도를 설정해주세요</option>
+    <option value="1">한자릿수</option>
+    <option value="2">두자릿수</option>
+    <option value="3">세자릿수</option>
+  </select>
+  <form class="container">
+    <h1>구구단을 맞춰 보아요</h1>
+    <div class="questionBox"></div>
+    <input type="text" class="answerInput" placeholder="정답을 입력하세요.">
+    <input type="submit" id="submitAnswer" class="submitBtn" value="제출">
+    <div id="result" class="resultBox"></div>
+    <button id="retry" class="retryBtn" style="display: none;">다시 도전</button>
+    <script>
+      const form = document.querySelector(".container");
+      const questionBox = document.querySelector(".questionBox");
+      const answerInput = document.querySelector(".answerInput");
+      const submitBtn = document.querySelector(".submitBtn");
+      const resultBox = document.querySelector(".resultBox");
+      const retryBtn = document.querySelector(".retryBtn");
+      const digit = document.querySelector(".digit");
+      let range = document.querySelector(".digit").value;
+      let question = '';
+      let answer = 0;
+
+      const getRandomNumber = (digit, start) => {
+        return Math.floor(Math.random() * (digit * 10 - (start + 1)) + start);
+      }
+
+      const createQuestion = () => {
+        const firstNum = getRandomNumber(range, 2);
+        const secondNum = getRandomNumber(range, 1);
+        question = `${firstNum} x ${secondNum} = ?`;
+        answer = firstNum * secondNum;
+      }
+
+      const showQuestion = () => {
+        questionBox.textContent = question;
+      }
+
+      const checkAns = (isCorrect) => {
+        if (isCorrect) {
+          resultBox.textContent = "정답입니다 q(≧▽≦q)";
+          resultBox.setAttribute("style", "color:green");
+        } else {
+          resultBox.textContent = "틀렸습니다. 다시 도전하세요 (；′⌒`)";
+          resultBox.setAttribute("style", "color:red");
+          retryBtn.setAttribute("style", "display: block");
+        }
+      }
+
+      const submitAnswerHandler = (e) => {
+        e.preventDefault();
+
+        if (answerInput.value.includes(" ") || isNaN(parseInt(answerInput.value))) {
+          alert("공백이나 숫자가 아닌 문자는 입력될 수 없습니다");
+          return;
+        }
+        checkAns(parseInt(answerInput.value) === answer)
+      }
+
+      const init = () => {
+        answerInput.focus();
+
+        retryBtn.setAttribute("style", "display:none");
+        resultBox.textContent = "";
+
+        createQuestion();
+        showQuestion();
+      }
+
+      window.onload = init();
+
+      digit.addEventListener("change", (e) => {
+        range = e.target.value;
+        init();
+      })
+      retryBtn.addEventListener("click", () => init());
+      form.addEventListener("submit", e => submitAnswerHandler(e));
+    </script>
+</body>
+
+</html>

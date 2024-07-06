@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ex07.이벤트 취소 및 재활성화</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #alertBtn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    #alertBtn:hover {
+      background-color: #0056b3;
+    }
+
+    #activeBtn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #activeBtn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>이벤트 취소 및 재활성화 예제</h1>
+  <button id="alertBtn">알림 표시</button>
+  <button id="activeBtn">알림 재활성화</button>
+
+  <script>
+    /*let isActive = false;
+
+    document.querySelector("#alertBtn").addEventListener("click", (e) => {
+      if (isActive) {
+        alert("알림 버튼이 클릭되었습니다. 동작이 실행되었습니다")
+      } else {
+        e.preventDefault();
+        console.log("알림 버튼이 클릭되었지만, 동작이 취소되었습니다");
+      }
+    })
+
+    document.querySelector("#activeBtn").addEventListener("click", () => {
+      if (isActive) {
+        console.log("알림 버튼 동작이 취소되었습니다");
+      } else {
+        console.log("알림 버튼 동작이 재활성화되었습니다");
+      }
+
+      isActive = !isActive;
+    });*/
+
+    const alertBtn = document.getElementById("alertBtn");
+    const activeBtn = document.getElementById('activeBtn');
+
+    const cancelAlert = (e) => {
+      e.preventDefault();
+      console.log("알림 버튼이 클릭되었지만, 동작이 취소되었습니다");
+    }
+
+    const showAlert = () => {
+      alert("알림 버튼이 클릭되었습니다. 동작이 실행되었습니다");
+    }
+
+    let alertHandler = cancelAlert;
+
+    alertBtn.addEventListener("click", alertHandler);
+    activeBtn.addEventListener("click", (e) => {
+      alertBtn.removeEventListener("click", alertHandler);
+      alertHandler = showAlert;
+      alertBtn.addEventListener("click", alertHandler);
+    });
+  </script>
+</body>
+
+</html>

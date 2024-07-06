@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>실습해보기4.Node 관계 다루기</title>
+  <style>
+    button {
+      margin: 5px;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>각 버튼을 클릭해보세요</h1>
+  <p class="title" id="first_title">container1</p>
+  <div class="container" id="container1" style="border: 5px solid black; height: 100px">
+    <button class="btn">1번</button>
+    <button class="btn">2번</button>
+    <button class="btn">3번</button>
+    <button class="btn">4번</button>
+  </div>
+  <p class="title" id="second_title">container2</p>
+  <div class="container" id="container2" style="border: 1px solid black; height: 100px"></div>
+  <p class="title" id="second_title">container3</p>
+  <div class="container" id="container3" style="border: 1px solid black; height: 100px"></div>
+  <script type="text/javascript">
+    const containers = document.querySelectorAll(".container");
+    const countOfContainer = containers.length;
+    const p = document.createElement("p");
+
+    document.querySelectorAll(".btn").forEach(button => button.addEventListener("click", ({ target }) => {
+      const { parentElement } = target;
+      let nextContainerId = (parseInt(parentElement.id.replace("container", "")) + 1) % (countOfContainer);
+      nextContainerId = nextContainerId ? nextContainerId : countOfContainer;
+
+      const nextContainer = document.querySelector(`#container${nextContainerId}`);
+
+      nextContainer.appendChild(target);
+
+      if (parentElement.children.length === 0) {
+        const text = parentElement.previousElementSibling;
+
+        p.textContent = `${nextContainer.id}(으)로 모두 이동 완료`;
+
+        text.insertAdjacentElement("beforeend", p);
+        /**
+        targetElement.insertAdjacentElement(position, element)
+
+          position
+          - beforebegin : targetElement의 앞에 추가
+          - beforeend : targetElement의 자식으로 추가
+          - afterbegin : targetElement의 가장 마지막 child 에 추가
+          - afterend : targetElement의 뒤에 추가
+
+          element
+          - 추가할 Element
+        */
+      }
+    }))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이벤트 흐름 중단</title>
+  <style>
+    #div_ {
+      background-color: #ccc;
+      padding: 20px;
+      display: block;
+    }
+
+    #p_ {
+      background-color: #aaa;
+      padding: 20px;
+      display: block;
+    }
+
+    span {
+      background-color: #888;
+      padding: 20px;
+      display: block;
+    }
+
+    section {
+      background-color: #4477aa;
+      padding: 0 10px 50px 20px;
+      margin: 50px 0 0 0;
+    }
+
+    section:before {
+      background-color: #114477;
+      padding: 5px;
+      margin: 0 0 0 -20px;
+      border-bottom: 2px solid #002244;
+      border-bottom-right-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      content: "결과 콘솔";
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div_">
+    DIV영역
+    <p id="p_">
+      P영역
+      <span id="span_">SPAN영역</span>
+    </p>
+  </div>
+  <section id="content"><br /><br /></section>
+  <script>
+    /**
+     * 이벤트 흐름 중단
+     * e.stopPropagation(): 이벤트 전파 중지
+     * e.stopImmdediatePropagation(): 이벤트 전파 중지 + 형제 이벤트 실행중지
+     * e.preventDefault(): 이벤트 기본 동작 중지
+     */
+    const content = document.getElementById("content");
+
+    document.querySelector("span").addEventListener("click", (e) => {
+      e.stopPropagation(); // 상위로 이벤트가 전파되지 않도록 중단 기능
+      e.stopImmediatePropagation(); // 상위뿐만 아니라 같은 레벨에도 이벤트가 전파되지 않도록 중단
+      // 태그명 클릭
+      content.append(`${e.currentTarget.tagName.toLowerCase()} 클릭 `);
+    })
+
+
+    document.querySelector("#span_").addEventListener("click", (e) => {
+      content.append("span 클릭2");
+    })
+
+    document.querySelector("p").addEventListener("click", (e) => {
+      // 태그명 클릭
+      content.append(`${e.currentTarget.tagName.toLowerCase()} 클릭 `);
+    })
+
+    document.querySelector("div").addEventListener("click", (e) => {
+      // 태그명 클릭
+      content.append(`${e.currentTarget.tagName.toLowerCase()} 클릭 `);
+    })
+
+
+    /***
+      * append vs appendChild
+      * - append() : node 객체, DOM String(text) 사용 가능, 한번에 여러 개의 자식 추가 가능
+      * - appendChild() : 오직 node 객체만 사용 가능, 한번에 하나의 노드만 추가 가능
+      */
+
+  </script>
+</body>
+
+</html>
